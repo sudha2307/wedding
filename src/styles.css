@@ -1,0 +1,164 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Wedding invitation design system — Praveen P. & Malini K.
+ * Palette (from the creative brief, converted to oklch):
+ *   White #FFFFFF · Ivory #FFF9F7 · Rose #E85D8E · Blush #F8D7E3
+ *   Deep wine #762B48 · Champagne gold #C9A46A · Charcoal #352B30 · Pink border #F0C5D4
+ */
+
+@theme {
+  --font-serif: "Cormorant Garamond", "Georgia", serif;
+  --font-script: "Great Vibes", cursive;
+  --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
+  --font-tamil: "Noto Sans Tamil", "Jost", sans-serif;
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-rose: var(--wedding-rose);
+  --color-rose-soft: var(--wedding-rose-soft);
+  --color-blush: var(--wedding-blush);
+  --color-ivory: var(--wedding-ivory);
+  --color-wine: var(--wedding-wine);
+  --color-gold: var(--wedding-gold);
+  --color-gold-soft: var(--wedding-gold-soft);
+  --color-charcoal: var(--wedding-charcoal);
+  --color-pink-border: var(--wedding-pink-border);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.302 0.017 346.6);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.302 0.017 346.6);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.302 0.017 346.6);
+  --primary: oklch(0.669 0.177 1.2);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.91 0.04 354);
+  --secondary-foreground: oklch(0.407 0.109 359.1);
+  --muted: oklch(0.986 0.007 39.5);
+  --muted-foreground: oklch(0.52 0.03 356);
+  --accent: oklch(0.91 0.04 354);
+  --accent-foreground: oklch(0.407 0.109 359.1);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(0.865 0.052 355.3);
+  --input: oklch(0.865 0.052 355.3);
+  --ring: oklch(0.669 0.177 1.2);
+
+  --wedding-rose: oklch(0.669 0.177 1.2);
+  --wedding-rose-soft: oklch(0.79 0.09 355);
+  --wedding-blush: oklch(0.91 0.04 354);
+  --wedding-ivory: oklch(0.986 0.007 39.5);
+  --wedding-wine: oklch(0.407 0.109 359.1);
+  --wedding-gold: oklch(0.739 0.087 78);
+  --wedding-gold-soft: oklch(0.86 0.06 82);
+  --wedding-charcoal: oklch(0.302 0.017 346.6);
+  --wedding-pink-border: oklch(0.865 0.052 355.3);
+
+  --gradient-rose: linear-gradient(135deg, oklch(0.72 0.16 5), oklch(0.62 0.19 358));
+  --shadow-rose-soft: 0 10px 30px -12px color-mix(in oklab, var(--wedding-rose) 35%, transparent);
+  --shadow-gold-soft: 0 8px 24px -10px color-mix(in oklab, var(--wedding-gold) 45%, transparent);
+}
+
+/* Tamil typography: switch heading + body fonts when the language is Tamil */
+body.lang-ta {
+  --font-serif: var(--font-tamil);
+  --font-script: var(--font-tamil);
+}
+
+.font-serif-en {
+  font-family: "Cormorant Garamond", "Georgia", serif !important;
+}
+.font-script-en {
+  font-family: "Great Vibes", cursive !important;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--wedding-rose) 25%, transparent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--wedding-rose);
+    outline-offset: 2px;
+  }
+}
+
+/* Brief full-page opacity pulse when the language swaps */
+@keyframes lang-fade {
+  from { opacity: 0.55; }
+  to { opacity: 1; }
+}
+html.lang-fading body {
+  animation: lang-fade 0.4s ease;
+}
+
+@keyframes drift-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@utility animate-drift {
+  animation: drift-float 6s ease-in-out infinite;
+}
+
+@utility text-gradient-rose {
+  background: var(--gradient-rose);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility shadow-rose-soft {
+  box-shadow: var(--shadow-rose-soft);
+}
+@utility shadow-gold-soft {
+  box-shadow: var(--shadow-gold-soft);
+}
